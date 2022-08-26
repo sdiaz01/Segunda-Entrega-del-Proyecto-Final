@@ -21,7 +21,7 @@ const sabor = document.querySelector("#sabor")
 const tiempo = document.querySelector("#tiempo")
 const imagen = document.querySelector("#img-uploader")
 
-btnAgregar.addEventListener("click", recargarAgregar)
+btnAgregar.addEventListener("click", agregarReceta)
 btnBorrar.addEventListener("click", borrarReceta)
 btnBuscar.addEventListener("click", buscarReceta)
 btnCalcular.addEventListener("click", realizarCotizacion)
