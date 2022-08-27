@@ -20,11 +20,13 @@ const tipo = document.querySelector("#tipo")
 const sabor = document.querySelector("#sabor")
 const tiempo = document.querySelector("#tiempo")
 const imagen = document.querySelector("#img-uploader")
+const textoAgregar = document.querySelector("spanAGREGAR")
+
 
 btnAgregar.addEventListener("click", agregarReceta)
 btnBorrar.addEventListener("click", borrarReceta)
 btnBuscar.addEventListener("click", buscarReceta)
-btnCalcular.addEventListener("click", realizarCotizacion)
+btnCalcular.addEventListener("click", calcularIMC)
 btnCerrarA.addEventListener("click", cerrarAgregar)
 btnCerrarC.addEventListener("click", cerrarIMC)
 btnCerrarB.addEventListener("click", cerrarBorrar)
@@ -66,21 +68,30 @@ function mostrarBorrar(){
 
 const datosCompletosIMC = ()=> { 
 
-    if (peso.value !== "Peso en kg" && altura.value !== "Altura en cm") {
+    if (peso.value !== "" && altura.value !== "" && peso.value > 0 && altura.value > 10 && peso.value < 300 && altura.value < 250) {
         return true
     } else {
+        peso.value = ""
+        altura.value = ""
+        textoIMC.innerText = "¡DEBE INGRESAR VALORES CORRECTOS!"
         return false 
     }
 }
 
-const datosCompletosAgregar  = ()=> { 
+const datosCompletosAgregar = ()=> { 
 
-    if (nombre.value !== "Peso en kg" && altura.value !== "Altura en cm") {
+    if (nombre.value !== "" && sabor.value !== "" && tipo.value !== "" && tiempo.value !== "") {
         return true
     } else {
+        nombre.value = ""
+        sabor.value = ""
+        tipo.value = ""
+        tiempo.value = ""
+        textoAgregar.innerText = "¡DEBE INGRESAR VALORES CORRECTOS!"
         return false 
     }
 }
+
 
 
 // $(document).ready(function(){

@@ -8,43 +8,14 @@ function generadorAutomatico() {
     recetas.push(new Receta('ALFAJORES DE MAICENA','ALFAJOR', "DULCE", '1:30 HORAS', './fotos/alfajordemaicena.jpeg'))
     recetas.push(new Receta('PASTAFROLA','TORTA', "DULCE", '1 HORA', './fotos/pastafrola.jpeg'))
     recetas.push(new Receta('BAGLES','APERITIVO', "SALADO", '3 HORAS', './fotos/bagles.jpeg'))
-    // recetas.push(new Receta('SCONES DE QUESO','PARA EL TÉ', "SALADO", '45 MINUTOS', './fotos/flan.jpg'))
     recetas.push(new Receta('TIRAMISÚ','POSTRE', "DULCE", '1 HORA', './fotos/tiramisu.jpeg'))
     recetas.push(new Receta('CARROT CAKE','TORTA', "DULCE", '2:30 HORAS', './fotos/carrotcake.jpeg'))
-    // recetas.push(new Receta('PANQUEQUES','POSTRE', "DULCE", '30 MINUTOS', './fotos/flan.jpg'))
     recetas.push(new Receta('BUDIN DE LIMON','PARA EL TÉ', "SEMI AMARGO", '2 HORAS', './fotos/budindelimon.jpeg'))
-    ingredientes.push(new Ingrediente('BROWNIE DE CHOCOLATE', 'CHOCOLATE', '200 GRAMOS'))
-    ingredientes.push(new Ingrediente('BROWNIE DE CHOCOLATE', 'HARINA', '2 TAZAS'))
-    ingredientes.push(new Ingrediente('BROWNIE DE CHOCOLATE', 'AGUA', '1 VASO'))
-    ingredientes.push(new Ingrediente('FLAN', 'LECHE', '1 LITRO'))
-    ingredientes.push(new Ingrediente('FLAN', 'HUEVO', '5 HUEVOS'))
-    ingredientes.push(new Ingrediente('FLAN', 'AZUCAR', '100 GRAMOS'))
+
     console.log("Se generaron recetas automaticamente.")
 }
 
 generadorAutomatico()
-
-function nuevaReceta() {
-    
-    let nombre = (prompt("Ingrese el nombre de la receta")).toUpperCase()
-    let tipo = (prompt("Ingrese el tipo de la receta", "Ej: comida, bebida, postre, torta, snack")).toUpperCase()
-    let sabor = (prompt("Ingrese el sabor de la receta", "Ej: dulce, salado, agridulce, amargo")).toUpperCase()
-    let tiempo = (prompt("Ingrese el tiempo aproximado de elaboración")).toUpperCase()
-
-    receta = new Receta(nombre, tipo, sabor, tiempo)
-
-    recetas.push(receta)
-    console.table(recetas)
-
-    let agregarAhora = true
-
-    agregarAhora = confirm("¿Desea agregar los ingredientes de la receta?")
-
-    if (agregarAhora) {       
-       agregarIngredientes(receta)
-    } 
-        console.log("La receta fue agregada exitosamente.")
-}
 
 function agregarIngredientes(receta) {
 
@@ -79,28 +50,6 @@ function agregarIngredientes(receta) {
 
 
 
-const realizarCotizacion = ()=> { 
-
-    const imc = new IMC(peso.value, altura.value)
-
-     if (datosCompletosIMC(true)) {
- 
-            valorIMC.innerText = imc.calcular()
-            
-    } else {
-        alert("error")
-    }
-
-    if (imc.calcular() >= 18.5 && imc <= 24.9) {
-        textoIMC.innerText = "Su peso se encuentra normal"
-    } else if (imc.calcular() > 25){
-        textoIMC.innerText = "Su peso se encuentra por arriba del limite"
-    } else if (imc.calcular() < 18.4){
-        textoIMC.innerText = "Su peso se encuentra por debajo del limite"
-    }
-
-}
-
 function buscarReceta() {
 
     const resultado = recetas.filter(receta => receta.nombre.includes((buscar.value).toUpperCase()))
@@ -128,15 +77,20 @@ function buscarReceta() {
     
 
 function borrarReceta() {
-        const borrarR = (borrar.value).toUpperCase()
-        const resultado = recetas.some(receta => receta.nombre === (borrarR))
+
+        let borrarR = (borrar.value).toUpperCase()
+
+        const resultado = recetas.some(receta => receta.nombre === borrarR)
     
-        if (resultado === true) {
-    
+        if (resultado == true) {
+
             recetas.pop(borrarR)
             borrar.value = ""
+            console.table(recetas)
             cargarRecetas()
+
         } else {
+
             document.querySelector("#borrandoReceta").style.display = 'none';
     
         }
@@ -144,7 +98,6 @@ function borrarReceta() {
     
 
 }
-
 
 
 function cargarRecetas() {
@@ -172,17 +125,52 @@ function cargarRecetas() {
 
  cargarRecetas()
 
- function agregarReceta() {
+ const calcularIMC = ()=> { 
 
+    const imc = new IMC(peso.value, altura.value)
+    let resultadoIMC = imc.calcular()
+     if (datosCompletosIMC(true)) {
+ 
+              valorIMC.innerText = resultadoIMC
+            
+    } 
+        debugger
+    if (resultadoIMC >= 18.5 && resultadoIMC <= 24.9) {
+        textoIMC.innerText = "Su peso se encuentra normal"
+    } else if (resultadoIMC > 25){
+        textoIMC.innerText = "Su peso se encuentra por arriba del limite"
+    } else if (resultadoIMC < 18.4){
+        textoIMC.innerText = "Su peso se encuentra por debajo del limite"
+    }
 
-    recetas.unshift(new Receta(nombre.value,tipo.value, sabor.value, tiempo.value, './fotos/proximamente.jpg'))
+    peso.value = ""
+    altura.value = ""
+
+}
+
+const agregarReceta = ()=> { 
+
+    const resultado = recetas.some(receta => receta.nombre === (nombre.value).toUpperCase())
+
+    if (datosCompletosAgregar(true) && resultado === false) {
+
+    recetas.unshift(new Receta((nombre.value).toUpperCase(),(tipo.value).toUpperCase(), (sabor.value).toUpperCase(), (tiempo.value).toUpperCase(), './fotos/proximamente.jpg'))
 
     nombre.value = ""
     tipo.value = ""
     sabor.value = ""
     tiempo.value = ""
+    textoAgregar.innerText = ""
 
     cargarRecetas()
 
+    } else if (datosCompletosAgregar(true) && resultado === true){
+        nombre.value = ""
+        tipo.value = ""
+        sabor.value = ""
+        tiempo.value = ""
+        textoAgregar.innerText = "¡LA RECETA YA EXISTE!"
+
+    }
 
 }
