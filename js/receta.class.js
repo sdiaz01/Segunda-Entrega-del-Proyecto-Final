@@ -30,5 +30,3 @@ class IMC {
 
 
 
-
-Ingrediente.nombre = Receta.nombre

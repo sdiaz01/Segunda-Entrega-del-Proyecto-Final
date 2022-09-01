@@ -11,8 +11,8 @@ const btnCerrarC = document.querySelector("#btnCerrarC")
 const btnCerrarB = document.querySelector("#btnCerrarB")
 //const campos = document.querySelectorAll("input")
 const btnAgregar = document.querySelector("#btnAgregar")
-const btnBorrar = document.querySelector("#btnBorrar")
 
+const btnBorrar = document.querySelector("#btnBorrar")
 const borrar = document.querySelector("#borrar")
 
 const nombre = document.querySelector("#nombre")
@@ -21,15 +21,25 @@ const sabor = document.querySelector("#sabor")
 const tiempo = document.querySelector("#tiempo")
 const imagen = document.querySelector("#img-uploader")
 const textoAgregar = document.querySelector("spanAGREGAR")
+const textoBorrar = document.querySelector("spanBORRAR")
 
 
 btnAgregar.addEventListener("click", agregarReceta)
 btnBorrar.addEventListener("click", borrarReceta)
+
 btnBuscar.addEventListener("click", buscarReceta)
+
 btnCalcular.addEventListener("click", calcularIMC)
 btnCerrarA.addEventListener("click", cerrarAgregar)
 btnCerrarC.addEventListener("click", cerrarIMC)
 btnCerrarB.addEventListener("click", cerrarBorrar)
+
+buscar.addEventListener('keyup', () => {
+    buscarReceta()
+    document.querySelector("#agregandoReceta").style.display = 'none';
+    document.querySelector("#calculandoIMC").style.display = 'none';
+    document.querySelector("#borrandoReceta").style.display = 'none';
+})
 
 itemAgregar.addEventListener("click", mostrarAgregar)
 itemIMC.addEventListener("click", mostrarIMC)
@@ -44,6 +54,7 @@ function mostrarAgregar(){
     document.querySelector("#borrandoReceta").style.display = 'none';
     document.querySelector("#calculandoIMC").style.display = 'none';
     document.querySelector("#agregandoReceta").style.display = 'block';
+    nombre.focus()
 }
 
 function cerrarIMC(){
@@ -54,6 +65,7 @@ function mostrarIMC(){
     document.querySelector("#borrandoReceta").style.display = 'none';
     document.querySelector("#agregandoReceta").style.display = 'none';
     document.querySelector("#calculandoIMC").style.display = 'block';
+    peso.focus()
 }
 
 function cerrarBorrar(){
@@ -64,6 +76,7 @@ function mostrarBorrar(){
     document.querySelector("#agregandoReceta").style.display = 'none';
     document.querySelector("#calculandoIMC").style.display = 'none';
     document.querySelector("#borrandoReceta").style.display = 'block';
+    borrar.focus()
 }
 
 const datosCompletosIMC = ()=> { 
@@ -73,6 +86,7 @@ const datosCompletosIMC = ()=> {
     } else {
         peso.value = ""
         altura.value = ""
+        peso.focus()
         textoIMC.innerText = "¡DEBE INGRESAR VALORES CORRECTOS!"
         return false 
     }
@@ -87,11 +101,24 @@ const datosCompletosAgregar = ()=> {
         sabor.value = ""
         tipo.value = ""
         tiempo.value = ""
+        nombre.focus()
         textoAgregar.innerText = "¡DEBE INGRESAR VALORES CORRECTOS!"
         return false 
     }
 }
 
+
+const datosCompletosBorrar= ()=> { 
+
+    if (borrar.value !== "") {
+        return true
+    } else {
+        borrar.value = ""
+        borrar.focus()
+        textoBorrar.innerText = "¡INGRESE EL NOMBRE DE LA RECETA!"
+        return false 
+    }
+}
 
 
 // $(document).ready(function(){
