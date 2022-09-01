@@ -1,4 +1,4 @@
-const recetas = []
+let recetas = []
 const ingredientes = []
 
 

@@ -10,7 +10,11 @@
     width: 50%;
 }
 
-
+#noEncontrado{
+  display: none;
+  position: absolute;
+  text-align:center;
+}
 
 #borrandoReceta {
     display: none;

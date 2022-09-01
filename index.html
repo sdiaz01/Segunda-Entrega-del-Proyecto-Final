@@ -46,8 +46,6 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" id="itemAgregar">Agregar receta</a></li>
                   <li><a class="dropdown-item" id="itemBorrar">Borrar receta</a></li>
-                  <li><a class="dropdown-item" id="itemOrdenar">ordenarReceta()</a></li>
-                  <li><a class="dropdown-item" id="itemModificar">modificarReceta()</a></li>
                 </ul>
               </li>
             </ul>
@@ -61,7 +59,6 @@
     </section>
   </header>
   <br><br>
-  <!--center-->
   <div class="contenedor">
 
     <div id="agregandoReceta">
@@ -104,22 +101,32 @@
       </p>
     </div>
 
+    <div id="noEncontrado">
+      <br><br>
+      <h2>NO SE ENCONTRARON RECETAS...</h2>
+    </div>
+
     <div id="borrandoReceta">
       <br><br>
       <button type="button" class="btn-close 3" id="btnCerrarB" aria-label="Close"></button>
       <h3>Borrar Receta:</h3>
       <br><br>
       <label>Ingrese el nombre de la receta que desea borrar:</label>
+      <br><br>
       <input class="form-control me-2" type="text" id="borrar" placeholder="Nombre">
       <br><br>
       <button class="btn btn-outline-danger" id="btnBorrar">BORRAR</button>
+      <br><br>
+      <p class="textoBorrar">
+        <spanBORRAR></spanBORRAR>
+      </p>
     </div>
   </div>
 
   <main>
     <br><br>
     <section>
-      
+
       <br><br>
       <br><br>
       <div id="cuerpo" class="grid">
